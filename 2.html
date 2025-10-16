@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mozzarella & Basilico — La Romana</title>
+  <meta name="description" content="Pizzería Mozzarella & Basilico en La Romana. Pizzas al horno de leña, pastas caseras, pedidos por WhatsApp y reservaciones." />
+  <meta name="theme-color" content="#b33a2b" />
+  <link rel="icon" href="data:;base64,iVBORw0K" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #b33a2b;
+      --accent-2: #7a2319;
+      --muted: #6b6b6b;
+      --radius: 16px;
+      --shadow: 0 8px 32px 0 rgba(179, 58, 43, 0.10);
+      --glass-bg: rgba(255,255,255,0.82);
+      --glass-blur: 18px;
+      --text: #1a232b;
+      --text-light: #fff;
+      --footer-bg: rgba(255,255,255,0.92);
+      --transition: .22s cubic-bezier(.4,0,.2,1);
+      font-family: 'Inter', system-ui, -apple-system,"Segoe UI",Roboto,Arial;
+      color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --glass-bg: rgba(32, 24, 24, 0.82);
+        --text: #fbeee6;
+        --footer-bg: rgba(26,35,43,0.96);
+      }
+      body { background: linear-gradient(180deg,#1a232b 0%, #2d1815 100%);}
+    }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; background: #fff7f5; color: var(--text); transition: background var(--transition), color var(--transition);}
+    body {
+      min-height:100vh;
+      background: 
+        linear-gradient(180deg,rgba(255,247,245,0.95) 0%,rgba(255,255,255,0.93) 100%),
+        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      position:relative;
+      background-image:url('https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=1600&q=80');
+      background-size:cover;
+      background-position:center;
+      height:60vh;
+      display:flex;
+      align-items:center;
+      border-radius:0 0 var(--radius) var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .overlay {
+      background:linear-gradient(180deg, rgba(179,58,43,0.55), rgba(122,35,25,0.22));
+      width:100%;height:100%;
+      display:flex;flex-direction:column;justify-content:flex-start;
+      backdrop-filter: blur(var(--glass-blur));
+    }
+    nav {
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:24px 40px 0 40px;
+      color:var(--text-light);
+      z-index:2;
+    }
+    nav .brand {
+      font-weight:900;
+      letter-spacing:2px;
+      font-size:1.35rem;
+      text-shadow:0 2px 12px rgba(0,0,0,0.14);
+      font-family: 'Inter', serif;
+      text-transform:uppercase;
+      letter-spacing:2.5px;
+    }
+    nav ul {
+      display:flex;
+      gap:22px;
+      list-style:none;
+      margin:0;padding:0;
+    }
+    nav a {
+      color:var(--text-light);
+      text-decoration:none;
+      padding:10px 18px;
+      border-radius:var(--radius);
+      font-weight:700;
+      font-size:1rem;
+      transition:background var(--transition), color var(--transition), box-shadow var(--transition);
+      position:relative;
+    }
+    nav a:hover, nav a:focus {
+      background:rgba(179,58,43,0.18);
+      color:#fff;
+      box-shadow:0 2px 12px rgba(179,58,43,0.12);
+    }
+    .hero {
+      max-width:1100px;
+      margin:0 auto;
+      padding:64px 24px 48px 24px;
+      color:var(--text-light);
+      text-shadow:0 2px 18px rgba(0,0,0,0.18);
+      z-index:2;
+    }
+    .hero h1 {
+      font-size:clamp(2.2rem,5vw,3.2rem);
+      margin:0 0 16px;
+      font-weight:900;
+      letter-spacing:0.5px;
+      line-height:1.1;
+      font-family: 'Inter', serif;
+    }
+    .hero p {
+      margin:0 0 24px;
+      opacity:.96;
+      font-size:1.18rem;
+      font-weight:500;
+      max-width:600px;
+    }
+    .btn {
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#fff;
+      padding:14px 28px;
+      border-radius:var(--radius);
+      text-decoration:none;
+      font-weight:700;
+      font-size:1.08rem;
+      box-shadow:0 2px 16px rgba(179,58,43,0.13);
+      border:none;
+      transition:background var(--transition), box-shadow var(--transition), transform var(--transition);
+      cursor:pointer;
+      display:inline-block;
+    }
+    .btn:hover, .btn:focus {
+      background:linear-gradient(90deg,var(--accent-2),var(--accent));
+      box-shadow:0 4px 24px rgba(179,58,43,0.22);
+      transform:translateY(-2px) scale(1.03);
+    }
+
+    main {
+      max-width:1100px;
+      margin:36px auto 0 auto;
+      padding:0 18px;
+    }
+    .layout {
+      display:grid;
+      grid-template-columns:1fr 370px;
+      gap:32px;
+    }
+    .card {
+      background:var(--glass-bg);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1.5px solid rgba(179,58,43,0.07);
+      padding:32px 28px;
+      backdrop-filter: blur(var(--glass-blur));
+      transition:box-shadow var(--transition), background var(--transition);
+      margin-bottom:0;
+    }
+    .card:hover {
+      box-shadow:0 12px 36px 0 rgba(179,58,43,0.10);
+      background:rgba(255,255,255,0.92);
+    }
+    h2 {
+      margin:0 0 18px;
+      font-size:1.5rem;
+      font-weight:900;
+      letter-spacing:0.2px;
+      color:var(--accent-2);
+    }
+    .muted{color:var(--muted)}
+
+    /* Menu */
+    .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .menu-item{
+      display:flex;gap:16px;align-items:center;
+      border-radius:12px;padding:14px;
+      background:rgba(255,250,249,0.95);
+      box-shadow:0 2px 8px rgba(179,58,43,0.04);
+      transition:background var(--transition), box-shadow var(--transition);
+    }
+    .menu-item:hover {
+      background:rgba(255,240,235,0.98);
+      box-shadow:0 4px 16px rgba(179,58,43,0.10);
+    }
+    .menu-item img{width:76px;height:66px;object-fit:cover;border-radius:10px}
+    .menu-info{flex:1}
+    .menu-info h4{margin:0 0 6px;font-size:16px;font-weight:700}
+    .price{font-weight:800}
+    .add{
+      background:transparent;
+      border:1.5px dashed var(--accent);
+      padding:7px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      color:var(--accent-2);
+      transition:background var(--transition), color var(--transition);
+    }
+    .add:hover { background:var(--accent); color:#fff; }
+
+    /* Cart */
+    .cart {position:sticky;top:20px}
+    .cart .item{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed #f1eae8}
+    .cart .total{display:flex;justify-content:space-between;padding-top:12px;font-weight:800}
+    .checkout{margin-top:12px;display:flex;gap:8px}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .gallery img{width:100%;height:110px;object-fit:cover;border-radius:10px;box-shadow:0 2px 8px rgba(179,58,43,0.06);transition:transform .18s;}
+    .gallery img:hover{transform:scale(1.04) rotate(-1deg);}
+
+    /* Contact */
+    form .row{display:flex;gap:8px}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #eee}
+    textarea{min-height:100px}
+
+    footer{
+      max-width:1100px;
+      margin:32px auto 0 auto;
+      padding:20px 18px;
+      color:#667;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:var(--footer-bg);
+      border-radius:var(--radius) var(--radius) 0 0;
+      box-shadow:0 -2px 18px rgba(179,58,43,0.06);
+      font-size:1.02rem;
+      transition:background var(--transition), color var(--transition);
+    }
+    footer a { color:var(--accent-2); text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+
+    /* Responsive */
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr;gap:18px;}
+      .gallery{grid-template-columns:repeat(2,1fr);}
+      nav ul{display:none;}
+      .hero{padding:40px 12px;}
+      main{padding:0 6px;}
+      .card{padding:22px 10px;}
+      footer{flex-direction:column;gap:8px;text-align:center;}
+    }
+    @media (max-width:600px){
+      .gallery{grid-template-columns:1fr;}
+      .hero h1{font-size:2rem;}
+      .card{padding:14px 4px;}
+      nav{padding:18px 8px 0 8px;}
+    }
+    /* Modern scrollbar */
+    ::-webkit-scrollbar { width: 10px; background:rgba(179,58,43,0.04);}
+    ::-webkit-scrollbar-thumb { background:rgba(179,58,43,0.13); border-radius:8px;}
+    ::selection { background:var(--accent); color:#fff;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="overlay">
+      <nav>
+        <div class="brand">Mozzarella & Basilico</div>
+        <ul>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#reservas">Reservas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="hero">
+        <div style="max-width:1100px;margin:0 auto;padding:10px 16px">
+          <h1>Auténtica cocina italiana en La Romana</h1>
+          <p>Pizza al horno, pastas caseras y sabores tradicionales. Pide por WhatsApp o reserva tu mesa.</p>
+          <a class="btn" href="#menu">Ver menú</a>
+          <a class="btn" href="#reservas" style="margin-left:10px;background:#2a9d8f">Reservar</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <section class="card">
+        <h2 id="menu">Menú — Pide por WhatsApp</h2>
+        <p class="muted">Haz click en <em>Agregar</em> y luego en <strong>Pedir por WhatsApp</strong> para enviar tu pedido.</p>
+
+        <div id="menuList" class="menu-grid">
+          <!-- Menu items injected by JS -->
+        </div>
+
+        <section style="margin-top:18px">
+          <h3>Galería</h3>
+          <div class="gallery" id="gallery">
+            <img src="descarga1.jpg" alt>
+            <img src="unnamed.jpg" alt>
+            <img src="https://source.unsplash.com/collection/1424340/800x600?sig=3" alt>
+            <img src="https://source.unsplash.com/collection/1424340/800x600?sig=4" alt>
+            <img src="https://source.unsplash.com/collection/1424340/800x600?sig=5" alt>
+            <img src="https://source.unsplash.com/collection/1424340/800x600?sig=6" alt>
+          </div>
+        </section>
+
+        <section style="margin-top:18px" id="reservas" class="card">
+          <h3>Reservaciones</h3>
+          <p class="muted">Reservas rápidas por WhatsApp (funciona en móvil y escritorio si tienes WhatsApp Desktop).</p>
+          <form id="reservaForm" onsubmit="handleReserva(event)">
+            <div class="row">
+              <input required name="name" placeholder="Nombre">
+              <input required name="phone" placeholder="Teléfono">
+            </div>
+            <div style="margin-top:8px">
+              <input required name="date" type="date">
+            </div>
+            <div style="margin-top:8px" class="row">
+              <input required name="time" type="time">
+              <input required name="people" type="number" min="1" value="2" placeholder="Personas">
+            </div>
+            <div style="margin-top:8px">
+              <textarea name="notes" placeholder="Notas (alergias, ocasión)"></textarea>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn" type="submit">Reservar por WhatsApp</button>
+              <button type="button" class="btn" style="background:#f4a261" onclick="reserveByEmail()">Reservar por Email</button>
+            </div>
+          </form>
+        </section>
+
+        <section style="margin-top:18px" id="contacto">
+          <h3>Contacto</h3>
+          <p class="muted">¿Dudas? Envíanos un correo o llámanos.</p>
+          <form onsubmit="contactViaMail(event)">
+            <div class="row">
+              <input required name="cname" placeholder="Tu nombre">
+              <input required name="cemail" placeholder="Tu email">
+            </div>
+            <div style="margin-top:8px">
+              <input name="subject" placeholder="Asunto">
+            </div>
+            <div style="margin-top:8px">
+              <textarea name="cmessage" placeholder="Mensaje"></textarea>
+            </div>
+            <div style="margin-top:10px">
+              <button class="btn" type="submit">Enviar por email</button>
+            </div>
+          </form>
+        </section>
+
+      </section>
+
+      <aside class="card cart">
+        <h2>Información</h2>
+        <p class="muted">Mozzarella & Basilico — Plaza Buena Vista, La Romana</p>
+        <p><strong>Teléfono / WhatsApp:</strong> <a href="tel:+18097761737">(809) 776-1737</a></p>
+        <div style="margin-top:10px">
+          <iframe class="map" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3814.123456789012!2d-68.9563827!3d18.4278254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8eaf55d153c4a5f5%3A0xc764fdd89a50f2b4!2sMozzarella%20%26%20Basilico!5e0!3m2!1ses!2sdo!4v1696000000000" style="width:100%;height:180px;border:0;border-radius:8px"></iframe>
+        </div>
+
+        <div style="margin-top:12px">
+          <h3>Pedido</h3>
+          <div id="cartItems"></div>
+          <div class="total"><div>Total</div><div id="totalPrice">$0</div></div>
+          <div class="checkout">
+            <button class="btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
+            <button class="btn" style="background:#f4a261" onclick="clearCart()">Vaciar</button>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div>© Mozzarella & Basilico — La Romana</div>
+    <div>Tel: <a href="tel:+18097761737">(809) 776-1737</a> • Plaza Buena Vista</div>
+  </footer>
+
+  <script>
+    // Data (editable)
+    const PHONE_WHATSAPP = '18097761737'; // country code + number, adjust if needed
+
+    // Menú real basado en Mozzarella & Basilico (La Romana, DR)
+    // Puedes ajustar los precios y descripciones según el menú real
+    const menu = [
+      // Pizzas
+      {id:1,name:'Pizza Margherita',desc:'Tomate, mozzarella, albahaca fresca',price:495,img:'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80'},
+      {id:2,name:'Pizza Pepperoni',desc:'Mozzarella, salsa de tomate, pepperoni',price:595,img:'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?auto=format&fit=crop&w=400&q=80'},
+      {id:3,name:'Pizza Prosciutto e Funghi',desc:'Jamón, champiñones, mozzarella',price:650,img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80'},
+      {id:4,name:'Pizza Cuatro Quesos',desc:'Mozzarella, gorgonzola, parmesano, ricotta',price:675,img:'https://images.unsplash.com/photo-1548365328-8b849e6c7b77?auto=format&fit=crop&w=400&q=80'},
+      {id:5,name:'Pizza Vegetariana',desc:'Vegetales frescos, mozzarella, tomate',price:595,img:'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80'},
+      // Pastas
+      {id:6,name:'Spaghetti Carbonara',desc:'Pasta, panceta, huevo, parmesano',price:525,img:'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80'},
+      {id:7,name:'Penne Arrabbiata',desc:'Pasta, salsa de tomate picante',price:495,img:'https://images.unsplash.com/photo-1523987355523-c7b5b0723c6a?auto=format&fit=crop&w=400&q=80'},
+      {id:8,name:'Lasagna Bolognesa',desc:'Láminas de pasta, ragú, bechamel, mozzarella',price:595,img:'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80'},
+      {id:9,name:'Fettuccine Alfredo',desc:'Pasta, salsa cremosa de queso parmesano',price:545,img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80'},
+      // Ensaladas
+      {id:10,name:'Ensalada Caprese',desc:'Mozzarella fresca, tomate, albahaca',price:395,img:'https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80'},
+      {id:11,name:'Ensalada César',desc:'Lechuga, pollo, parmesano, aderezo César',price:425,img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80'},
+      // Postres
+      {id:12,name:'Tiramisú',desc:'Postre clásico italiano',price:295,img:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80'},
+      {id:13,name:'Panna Cotta',desc:'Postre de nata, coulis de frutas',price:275,img:'https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80'}
+    ];
+
+    // Cart logic
+    const CART_KEY = 'm_b_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+
+    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); renderCart(); }
+
+    function renderMenu(){
+      const el = document.getElementById('menuList');
+      el.innerHTML = '';
+      menu.forEach(it => {
+        const div = document.createElement('div'); div.className='menu-item';
+        div.innerHTML = `
+          <img src="${it.img}" alt="${it.name}">
+          <div class="menu-info"><h4>${it.name}</h4><div class="muted">${it.desc}</div></div>
+          <div style="text-align:right"><div class="price">$${it.price}</div>
+          <button class="add" onclick="addToCart(${it.id})">Agregar</button></div>`;
+        el.appendChild(div);
+      });
+    }
+
+    function addToCart(id){
+      const item = menu.find(m=>m.id===id);
+      const existing = cart.find(c=>c.id===id);
+      if(existing){ existing.qty++; } else { cart.push({id:item.id,name:item.name,price:item.price,qty:1}); }
+      saveCart();
+    }
+
+    function renderCart(){
+      const el = document.getElementById('cartItems'); el.innerHTML='';
+      let total=0;
+      cart.forEach(ci=>{
+        const row = document.createElement('div'); row.className='item';
+        row.innerHTML = `<div>${ci.qty} x ${ci.name}</div><div>$${(ci.price*ci.qty).toFixed(2)}</div>`;
+        el.appendChild(row);
+        total += ci.price*ci.qty;
+      });
+      document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
+    }
+
+    function clearCart(){ cart=[]; saveCart(); }
+
+    function checkoutWhatsApp(){
+      if(cart.length===0){ alert('El carrito está vacío. Agrega algo al pedido.'); return; }
+      const lines = cart.map(c=>`${c.qty} x ${c.name} — $${(c.price*c.qty).toFixed(2)}`);
+      const total = cart.reduce((s,c)=>s+c.qty*c.price,0).toFixed(2);
+      const msg = `Hola Mozzarella & Basilico!%0AQuisiera hacer un pedido:%0A${encodeURIComponent(lines.join('%0A'))}%0A%0ATotal: $${total}%0A%0AEnvío a recoger / a domicilio? (escribe dirección si domicilio):`;
+      const url = `https://wa.me/${PHONE_WHATSAPP}?text=${msg}`;
+      window.open(url,'_blank');
+    }
+
+    // Reservations via WhatsApp
+    function handleReserva(e){ e.preventDefault(); const f = e.target; const data = new FormData(f);
+      const name = data.get('name'); const phone = data.get('phone'); const date = data.get('date'); const time = data.get('time'); const people = data.get('people'); const notes = data.get('notes');
+      const text = `Hola, quiero reservar:\nNombre: ${name}\nTel: ${phone}\nFecha: ${date} ${time}\nPersonas: ${people}\nNotas: ${notes}`;
+      const encoded = encodeURIComponent(text);
+      const url = `https://wa.me/${PHONE_WHATSAPP}?text=${encoded}`;
+      window.open(url,'_blank');
+    }
+
+    function reserveByEmail(){
+      const f = document.getElementById('reservaForm'); const data = new FormData(f);
+      const subject = `Reserva: ${data.get('name')} - ${data.get('date')}`;
+      const body = `Nombre: ${data.get('name')}%0ATel: ${data.get('phone')}%0AFecha: ${data.get('date')} ${data.get('time')}%0APersonas: ${data.get('people')}%0ANotas: ${data.get('notes')}`;
+      window.location.href = `mailto:mozzarella.basilico@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    }
+
+    // Contact form via mailto
+    function contactViaMail(e){ e.preventDefault(); const f = e.target; const data = new FormData(f);
+      const subject = data.get('subject') || 'Contacto desde web';
+      const body = `Nombre: ${data.get('cname')}%0AEmail: ${data.get('cemail')}%0A%0A${data.get('cmessage')}`;
+      window.location.href = `mailto:mozzarella.basilico@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    }
+
+    // Init
+    renderMenu(); renderCart();
+  </script>
+</body>
+</html>
